@@ -1,0 +1,34 @@
+class Solution
+{
+    public:
+	bool solve(int s,vector<int> &vis,vector<int> &order,vector<int>adj[])
+	{
+	    vis[s]=1;
+	    order[s]=1;
+	    for(auto x:adj[s])
+	    {
+	        if(!vis[x])
+	        {
+	            bool c = solve(x,vis,order,adj);
+	            if(c) return true;
+	        }
+	        else if (order[x]) return true;
+	    }
+	    order[s]=0;
+	    return false;
+	}
+	bool isCyclic(int V, vector<int> adj[]) 
+	{
+	    vector<int>vis(V,0);
+	    vector<int>order(V,0);
+	    for(int i=0;i<V;i++)
+	    {
+	        if(!vis[i])
+	        { 
+	          bool c = solve(i,vis,order,adj);
+	          if(c) return true;
+	        }
+	    }
+	    return false;
+	}
+};
