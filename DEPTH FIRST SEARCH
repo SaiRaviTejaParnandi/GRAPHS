@@ -1,0 +1,24 @@
+class Solution 
+{
+    public:
+	vector<int>ans;
+	void DFS(int src,vector<int> &vis, vector<int> a[] )
+	{
+	    vis[src]=1;
+	    ans.push_back(src);
+	    for(auto x:a[src])
+	    {
+	        if(!vis[x])
+	        {
+	            DFS(x,vis,a);
+	        }
+	    }
+	}
+	vector<int>dfsOfGraph(int V, vector<int> adj[])
+	{
+	   ans.clear();
+	   vector<int> vis(V,0);
+	   DFS(0,vis,adj);
+	   return ans;
+	}
+};
